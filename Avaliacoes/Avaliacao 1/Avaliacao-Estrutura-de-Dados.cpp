@@ -98,6 +98,7 @@ main(void){
 		   	break;
  		   case 3:
  		  			puts("Informe a Poltrona que deseja verificar a reserva");
+ 		  			
 		   	break;
   		   case 4:
   		   			puts("Lista de todas as Poltronas");
