@@ -6,25 +6,26 @@
 
 using namespace std;
 
-typedef int sessaoCinema[2][16][21];
+typedef int sessaoCinema[3][16][21];
 
 
-// void limpaReservas(sessaoCinema *limpasessao){
-// 	for (int ns = 2; ns < count; ns++)// representa as duas sessoes
-// 	{
-// 		for(int nf=0;nf<16;nf++)//representa as filas
-// 		{
-// 			for(int nc=0;nc<21;nc++)// representa os corredores
-// 			{
-// 				if((nf!=0) && (nc!=10))
-// 				{
-// 					limpasessao[ns][nf][nc] = 0;
-// 				}else{
-// 					limpasessao[ns][nf][nc] = 1;
-// 				}
-// 			}
-// 		}
-// 	}
+ void limpaReservas(sessaoCinema limpasessao){
+ 	 for(int i = 1; i <=2 ; i++)
+ 	 {
+ 		for(int nf=0;nf<16;nf++)//representa as filas
+ 		{
+ 			for(int nc=0;nc<21;nc++)// representa os corredores
+ 			{
+ 				if((nf!=0) && (nc!=10))
+ 				{
+ 					limpasessao[i][nf][nc] = 0;
+ 				}else{
+ 					limpasessao[i][nf][nc] = 1;
+ 				}
+ 			}
+ 		}
+ 	 }
+ }
 
 
 void reservaPoltrona(sessaoCinema _sessao,int nSessao, int nfila, int ncorredor)
@@ -32,56 +33,119 @@ void reservaPoltrona(sessaoCinema _sessao,int nSessao, int nfila, int ncorredor)
 	if(_sessao[nSessao][nfila][ncorredor] == 0)
 	{//significa que nao estao reservada
 		_sessao[nSessao][nfila][ncorredor]  = 1;
-		cout << "Reserva para a sess?["<<nSessao<<"] poltrona[" << nfila << "][" << ncorredor << "] realizada!!!" << endl<<endl;
+		cout << "Reserva para a sessao["<<nSessao<<"] poltrona[" << nfila << "][" << ncorredor << "] realizada!!!" << endl<<endl;
 		system("pause");	 
 	}
 	else
 	{
-		cout << "N? foi possivel reservar a sessao["<<nSessao<<"] poltrona[" << nfila << "][" << ncorredor << "]!!!" << endl<<endl;
+		cout << "A Poltrona escolhida j� est� reservada!" << endl<<endl;
 		
-		cout << "Escolha a op?o novamente para outra poltrona" << endl<< endl;
+		cout << "Escolha a opcao novamente para outra poltrona" << endl<< endl;
 		system("pause");		
 	}
 	
 }
 
+void verificaPoltronaReservada(sessaoCinema _sessao,int nSessao, int nfila, int ncorredor)
+{
+	if(_sessao[nSessao][nfila][ncorredor] == 1)
+	{//significa que nao estao reservada
+		puts("Poltrona Reservada");
+		system("pause");	 
+	}
+	else
+	{
+		puts("Poltrona livre");
+		system("pause");		
+	}
+}
 void cancelaReservaPoltona(sessaoCinema _sessao,int nSessao, int nfila, int ncorredor)
 {
-	char opcao;
-	cout<<"Tem certezaq que deseja cancelar a SESSAO ["<<nSessao<<"], na FILA["<<nFila<<"] no CORREDOR["<<ncorredor<<"] ?"<<endl<<" S(sim) N(N?)"<<endl;
-	cin>>opcao;
-	opcao = toupper(opcao);
-	if(opcao=="S")
-	{
+
 		if(_sessao[nSessao][nfila][ncorredor] == 1)
 		{//significa que nao estao reservada
 			_sessao[nSessao][nfila][ncorredor]  = 0;
 			puts("");
-			cout << "Reserva para a sessão"<<nSessao<<"] poltrona[" << nfila << "][" << ncorredor << "] Cancelada com sucesso!!!" << endl<<endl;
+			cout << "Reserva para a sessao["<<nSessao<<"] poltrona[" << nfila << "][" << ncorredor << "] Cancelada com sucesso!!!" << endl<<endl;
 			system("pause");	 
 		}
 		else
 		{
-			cout << "Não foi possivel cancelar a sessao["<<nSessao<<"] poltrona[" << nfila << "] Corredor[" << ncorredor << "] por que ela já está livre!!!" << endl<<endl;
+			cout << "NAO � possivel cancelar uma Poltrona LIVRE!!!"<< endl<<endl;
 			
-			cout << "Escolha a opção novamente para outra poltrona" << endl<< endl;
+			cout << "Escolha a opcao novamente para outra poltrona" << endl<< endl;
 			system("pause");		
 		}
-	}
-	else if(opcao=="N")
-	{
-		puts("Tudo bem, escolha uma opção no menu principal.");
-		system("pause");
-	}
+
 }
 
-
-
+void ListaTodasPoltronas(sessaoCinema sessao){
+ 	 for(int i = 1; i <=2 ; i++)
+ 	 {
+ 	 	puts("**********************************");
+	    cout<<"Poltronas da "<<i<<"� SESS�O"<<endl;
+	   puts("**********************************");
+ 		for(int nf=1;nf<16;nf++)//representa as filas
+ 		{
+ 			for(int nc=0;nc<21;nc++)// representa os corredores
+ 			{
+ 					if(sessao[i][nf][nc]==1 &&nc!=10)
+ 					{
+ 						
+ 						cout<<"Sessao["<<i<<"], Fila["<<nf<<"], Corredor["<<nc<<"] = RESERVADO"<<endl;
+ 					}
+ 					else
+					 {
+						 cout<<"Sessao["<<i<<"], Fila["<<nf<<"], Corredor["<<nc<<"] = LIVRE"<<endl;
+					 }
+ 			}
+ 		}
+ 	 }
+ 	 system("pause");
+ }
+ 
+ void ListaReservadas(sessaoCinema sessao){
+ 	 for(int i = 1; i <=2 ; i++)
+ 	 {
+ 		for(int nf=1;nf<16;nf++)//representa as filas
+ 		{
+ 			for(int nc=0;nc<21;nc++)// representa os corredores
+ 			{
+ 					if(sessao[i][nf][nc]==1 && nc!=10)
+ 					{
+ 						cout<<"Sessao["<<i<<"], Fila["<<nf<<"], Corredor["<<nc<<"] = RESERVADO"<<endl;
+ 					}
+ 				
+ 			}
+ 		}
+ 	 }
+ 	 system("pause");
+ }
+ void ListaLivres(sessaoCinema sessao){
+ 	 for(int i = 1; i <=2 ; i++)
+ 	 {
+ 		for(int nf=1;nf<16;nf++)//representa as filas
+ 		{
+ 			for(int nc=0;nc<21;nc++)// representa os corredores
+ 			{
+ 				if(sessao[i][nf][nc]==1 && nc!=10)
+				 {
+				 	
+				 }
+ 					else
+					 {
+						 cout<<"Sessao["<<i<<"], Fila["<<nf<<"], Corredor["<<nc<<"] = LIVRE"<<endl;
+					 }
+ 			}
+ 		}
+ 	 }
+ 	 system("pause");
+ }
 int ValidaCorredorEntrada(int corredor)
 {//retorna 1 se o corredor for valido
 	if((corredor<0) or (corredor>21) or (corredor == 10))
 	{
-		cout << "Os corredores devem estar entre 0 e 20, exluído o corredor 10 que não possui assentos!" << endl << endl;
+		cout << "Os corredores devem estar entre 0 e 20, excluido o corredor 10 que nao possui assentos!" << endl << endl;
 		return(0);
 	}else{
 		return(1);
@@ -92,7 +156,7 @@ int ValidaFilaEntrada(int fila)
 {// retorna 1 se a fila for valida
 	if((fila<1) or (fila>16))
 	{
-		cout << "As filas devem estar entre 1 e 15, lembrando a fila 0 n? possui assentos!" << endl << endl;
+		cout << "As filas devem estar entre 1 e 15, lembrando a fila 0 nao possui assentos!" << endl << endl;
 		return(0);
 	}
 	else{
@@ -104,13 +168,14 @@ int main(void)
 {
 	setlocale(LC_ALL,"Portuguese");
 	sessaoCinema _sessao;
-	// limpaReservas(&sessao);
+	 limpaReservas(_sessao);
 	int opcaoMenu,
 	nCorredor=0,
 	nFila=0,
 	nSessao=0,
 	validaEntrada=0;
 	do{
+		
 		system("cls");
 		cout << "|================OPCOES================|" << endl;
 		cout << "|                                      |" << endl;
@@ -129,7 +194,7 @@ int main(void)
 		{
 			case 1:
 			do{
-				cout << "Deseja reservar a sessão numero 1 ou numero 2?" << endl;
+				cout << "Deseja reservar a sessao numero 1 ou numero 2?" << endl;
 				cin>>nSessao;
 				cout << "Informe a fila da poltrona desejada: " << endl;
 				cin >> nFila;
@@ -149,7 +214,7 @@ int main(void)
 			case 2:
 			
 			do{
-				cout << "Informe o numero da sessão:" << endl;
+				cout << "Informe o numero da sessao:" << endl;
 				cin>>nSessao;
 				puts("");
 				cout << "Informe a fila da poltrona desejada: " << endl;
@@ -171,20 +236,42 @@ int main(void)
 			break;
 //////////////////////////////////////////////////////////////
 			case 3:
-			puts("Informe a Poltrona que deseja verificar a reserva");
-			cin>>nFila;
+		
+			do{
+				cout << "Informe o numero da sessao:" << endl;
+				cin>>nSessao;
+				puts("");
+				cout << "Informe a fila da poltrona desejada: " << endl;
+				cin >> nFila;
+				puts("");
+				validaEntrada = ValidaFilaEntrada(nFila);// se retornar 1 é valido
+			}while(validaEntrada==0);
+			//**************************************
+			do{
+				cout << "Informe o corredor da poltrona desejada: " << endl;
+				cin >> nCorredor;
+				puts("");
+				validaEntrada = ValidaCorredorEntrada(nCorredor);// se retornar 1 é valido
+			}while(validaEntrada==0);
+			//**************************************
+			system("cls");
+			verificaPoltronaReservada(_sessao,nSessao,nFila,nCorredor);
 			break;
 //////////////////////////////////////////////////////////////
 			case 4:
 			puts("Lista de todas as Poltronas");
+			ListaTodasPoltronas(_sessao);
+			
 			break;
 //////////////////////////////////////////////////////////////
 			case 5:
 			puts("Lista de Poltronas Reservadas");
+			ListaReservadas(_sessao);
 			break;
 //////////////////////////////////////////////////////////////
 			case 6:
 			puts("Lista de Poltronas Livres");
+			ListaLivres(_sessao);
 			break;
 //////////////////////////////////////////////////////////////
 			case 7:
