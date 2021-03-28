@@ -47,7 +47,7 @@ int VERIFICA_ENTRADA_CORREDOR(int CORREDOR){
 
 int VERIFICA_ENTRADA_FILA(int FILA){
 	if((FILA<1) or (FILA>16)){
-		cout << "As filas devem estar entre 1 e 15, lembrando a fila 0 nÃo possui assentos!" << endl << endl;
+		cout << "As filas devem estar entre 1 e 15, lembrando a fila 0 n? possui assentos!" << endl << endl;
 		return(0);
 	}
 	else{
@@ -62,7 +62,7 @@ main(void){
 	int OPC,CORREDOR=0,FILA=0,VERIFICA_ENTRADA=0;
 	do{
 		system("cls");
-		cout << "|================OPÇÕES================|" << endl;
+		cout << "|================OP?ES================|" << endl;
 		cout << "|                                      |" << endl;
 		cout << "| 1) Reservar poltrona                 |" << endl;
 		cout << "| 2) Cancelar Reserva                  |" << endl;
@@ -73,7 +73,7 @@ main(void){
 		cout << "| 7) Sair                              |" << endl;
 		cout << "|                                      |" << endl;
 		cout << "|======================================|" << endl;
-		cout << "Informe a opção desejada: ";
+		cout << "Informe a op?o desejada: ";
 		cin >> OPC;
 		switch(OPC)
 		{
@@ -112,7 +112,7 @@ main(void){
 				exit(0);
 		   	break;
 	  	   default:
-			   cout << "Esta não é uma opção disponive" << endl << "Escolha uma opção presente nas opções apresentadas." << endl << endl;
+			   cout << "Esta n? ?uma op?o disponive" << endl << "Escolha uma op?o presente nas op?es apresentadas." << endl << endl;
 			   system("pause");
 		   	   break;
 	    }
